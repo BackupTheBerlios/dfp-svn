@@ -1,0 +1,7 @@
+This is a bare-bone DFP manager to test the DFP agent.
+
+There are 3 possibilities:
+- using python/scapy 
+- using python/asyncore with xxx to interface with the C DFP wire format
+- using C/CPE
+

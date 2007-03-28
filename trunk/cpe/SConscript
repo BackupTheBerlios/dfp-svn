@@ -1,0 +1,12 @@
+# $Id: SConscript 130 2007-03-27 10:12:41Z mmolteni $
+
+Import('env')
+
+# Linux needs this.
+#env.Append(CPPFLAGS = '-D__USE_ISOC99')
+
+env.StaticLibrary('cpe', ['cpe.c', 'cpe-logging.c', 'cpe-network.c',
+    'cpe-utils.c', 'cpe-resource.c'])
+env.StaticLibrary('cpe-algorithms', ['cpe-algorithms.c'])
+
+SConscript('test/SConscript')

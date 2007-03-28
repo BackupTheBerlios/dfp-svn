@@ -1,0 +1,38 @@
+# $Id: SConscript 131 2007-03-27 10:19:35Z mmolteni $
+
+Import('env')
+import os
+
+# Plugins
+#
+# If there is an OS-specific plugin, use it. Otherwise use the dummy plugin.
+#
+if env['PLATFORM'] == 'posix':
+    # Which flavor of unix?
+    os_name = os.popen('uname').read()
+    os_name = os_name.strip('\n')
+else:
+    os_name = env['PLATFORM']
+print 'Building on a %s/%s platform.' % (env['PLATFORM'], os_name)
+
+src_dummy = 'plugins/dummy-plugin.c'
+src_specific = 'plugins/%s/plugin.c' % os_name
+if os.path.exists(src_specific):
+    src = src_specific
+else:
+    src = src_dummy
+
+plugin_o = env.StaticObject(src)
+# we keep building the dummy plugin to be sure it compiles
+plugin_dummy_o = env.StaticObject(src_dummy)
+
+
+# Library and Agent.
+#
+
+env.StaticLibrary('dfp', ['dfp-common.c'])
+
+env.Append(LIBS = ['dfp', 'cpe', 'apr-1', 'cpe-algorithms', 'wire'])
+env.Program('dfp-agent',
+    [plugin_o, 'agent.c', 'config.c', 'probe.c'])
+

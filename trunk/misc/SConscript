@@ -1,0 +1,8 @@
+
+Import('env')
+
+
+env.Append(LIBS = ['cpe', 'apr-1', 'cpe-algorithms'])
+env.Program('socket-cleanup.c')
+env.Program('load-cpu.c')
+env.Program('load-disk.c')

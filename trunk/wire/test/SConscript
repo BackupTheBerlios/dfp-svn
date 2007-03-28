@@ -1,0 +1,8 @@
+# $Id: SConscript 129 2007-03-27 08:33:14Z mmolteni $
+
+Import('env')
+
+libs = ['tap', 'wire']
+wire1 = env.Program('test-wire-1.c', LIBS = libs)
+
+env.MyTest(source = wire1)

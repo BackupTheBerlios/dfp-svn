@@ -1,0 +1,7 @@
+# $Id: SConscript 129 2007-03-27 08:33:14Z mmolteni $
+
+Import('env')
+
+env.StaticLibrary('wire', ['wire.c'])
+
+SConscript('test/SConscript')

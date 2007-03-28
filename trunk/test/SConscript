@@ -1,0 +1,8 @@
+# $Id: SConscript 129 2007-03-27 08:33:14Z mmolteni $
+
+Import('env')
+
+# TODO: default target should not only compile, but also run the test!
+#Default('xxx')
+
+

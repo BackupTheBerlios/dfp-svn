@@ -1,0 +1,92 @@
+# Top-level scons build file for the Cisco DFP implementation.
+# $Id: SConstruct 140 2007-03-28 07:50:36Z mmolteni $
+#
+# Requires the scons utility (www.scons.org)
+# Just type "scons" instead of "make".
+
+import sys
+import os
+
+EnsureSConsVersion(0, 96, 92)
+
+APR_BASEDIR = 'external-libs/apr-1.2.8'
+TAP_BASEDIR = 'external-libs/libtap'
+
+# TODO passing apr info this way is wrong. Should use ParseConfig only.
+cpppath = ['#cpe',
+           '#agent',
+           '#wire',
+           '#external-libs/libtap/installed/include',
+           '#' + APR_BASEDIR + '/installed/include/apr-1']
+
+libpath = ['#cpe',
+           '#agent',
+           '#wire',
+           '#external-libs/libtap/installed/lib',
+           '#' + APR_BASEDIR + '/installed/lib']
+
+bdecflags = ['-W', '-Wall', '-Wbad-function-cast', '-Wcast-align',
+             '-Wcast-qual', '-Wchar-subscripts', '-Winline',
+             '-Wmissing-prototypes', '-Wnested-externs', '-Wpointer-arith',
+             '-Wredundant-decls', '-Wshadow', '-Wstrict-prototypes']
+
+ccflags = ['-W', '-Wall', '-Werror', '-g', '-O0']
+#ccflags = ['-W', '-Wall', '-Werror', '-g', '-O0'] + bdecflags
+
+
+# Build external dependencies that use configure/make.
+# Note that we want static libraries, otherwise with shared we would need
+# either to set LD_PRELOAD, or install them in a system path, or use the
+# rpath option (that works for Linux but not on FreeBSD). To me in this case
+# shared is just added complexity without any advantage.
+# Note also that --enable-shared=NO doesn't seem to work for APR.
+if not GetOption('clean'):
+    import foreignbuild
+    if not os.path.exists(APR_BASEDIR):
+        print 'Error: You need to unpack the apr library under', APR_BASEDIR
+        print '       and then resume the build.'
+        sys.exit(1)
+    if foreignbuild.configuremake(APR_BASEDIR, 'installed',
+        conf_args = ['--disable-threads', '--disable-shared']) != 0:
+        print 'foreignbuild failed, cannot proceed'
+        sys.exit(1)
+    if not os.path.exists(TAP_BASEDIR):
+        print 'Error: You need to unpack the libtap library under', TAP_BASEDIR
+        print '       and then resume the build.'
+        sys.exit(1)
+    if foreignbuild.configuremake(TAP_BASEDIR, 'installed',
+        conf_args = ['--enable-shared=NO'], bootstrap = False) != 0:
+        print 'foreignbuild failed, cannot proceed'
+        sys.exit(1)
+
+#sys.exit(1)
+
+env = Environment(CPPPATH = cpppath,
+                  CCFLAGS = ccflags,
+                  LIBPATH = libpath)
+
+# Take into consideration toolchain flags required by APR
+env.ParseConfig(APR_BASEDIR + '/installed/bin/apr-1-config --cppflags --libs')
+
+# Integrate testing into building.
+#
+# Will run the test, using mytestaction, only when something in the
+# dependencies has changed.
+#
+# Usage:
+# p = Program('test-cpe', 'test-cpe.c')
+# env.Mytest(source = p)
+# mmhh, it seems that prove(1) has a bad influence on timers...
+mytestaction = "prove ${SOURCE}.t && touch ${TARGET}"
+#mytestaction = "${SOURCE} > /dev/null && touch ${TARGET}"
+mytest = Builder(action = mytestaction, suffix = '.tested')
+env.Append(BUILDERS = {'MyTest': mytest})
+
+Export('env')
+
+SConscript('agent/SConscript')
+SConscript('manager/SConscript')
+SConscript('wire/SConscript')
+SConscript('cpe/SConscript')
+SConscript('test/SConscript')
+SConscript('misc/SConscript')

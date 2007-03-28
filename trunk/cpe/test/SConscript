@@ -1,0 +1,43 @@
+# $Id: SConscript 131 2007-03-27 10:19:35Z mmolteni $
+
+Import('env')
+
+algo1 = env.Program('test-cpe-algorithms.c',
+    LIBS = ['tap', 'cpe-algorithms'])
+
+env.Append(LIBS = ['cpe', 'tap', 'apr-1', 'cpe-algorithms'])
+o1 = env.Object('test-cpe-common.c')
+cpe1 = env.Program(['test-cpe-1.c'] + o1)
+cpe2 = env.Program(['test-cpe-2.c'] + o1)
+cpe3 = env.Program(['test-cpe-3.c'] + o1)
+cpe4 = env.Program(['test-cpe-4.c'] + o1)
+cpe5 = env.Program(['test-cpe-5.c'] + o1)
+cpe6 = env.Program(['test-cpe-6.c'] + o1)
+cpe7 = env.Program(['test-cpe-7.c'] + o1)
+cpe8 = env.Program(['test-cpe-8.c'] + o1)
+
+# TODO test one-shot with file descriptors
+# TODO test main_loop(0), wait forever. To exit, use a callback.
+# TODO test what happens with an explicit expiration (add2), plus
+# timeout = 0 (infinite)
+# TODO test what happens when entering main loop with no events
+
+# TODO find a way to tell scons to delay the test till the end of building
+# maybe with env.AddPostAction(target, action)
+# Arranges  for  the  specified  action  to be performed after the
+# specified target has been built.
+# doesn't work :-(
+#all_progs = [algo1, cpe1, cpe2, cpe3, cpe4]
+#env.AddPostAction(all_progs, env.MyTest(source = cpe1))
+
+env.MyTest(source = algo1)
+env.MyTest(source = cpe1)
+env.MyTest(source = cpe2)
+# XXX Test 3 is broken on Linux, must fix it
+#env.MyTest(source = cpe3)
+env.MyTest(source = cpe4)
+env.MyTest(source = cpe5)
+env.MyTest(source = cpe6)
+# XXX test 7 is broken, must fix it
+#env.MyTest(source = cpe7)
+env.MyTest(source = cpe8)

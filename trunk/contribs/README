@@ -1,0 +1,7 @@
+$Id: README 129 2007-03-27 08:33:14Z mmolteni $
+
+This directory contains contributions and or patches made to different
+projects while developing DFP and CPE:
+
+apr       - Apache Portable Runtime
+wireshark - Wireshark (Ethereal) network protocol analyzer

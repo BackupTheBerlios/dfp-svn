@@ -1,0 +1,7 @@
+# $Id: SConscript 131 2007-03-27 10:19:35Z mmolteni $
+
+Import('env')
+
+env.Append(LIBS = ['dfp', 'cpe', 'apr-1', 'cpe-algorithms', 'wire'])
+env.Program('dfp-manager',
+    ['manager.c', 'config.c'])

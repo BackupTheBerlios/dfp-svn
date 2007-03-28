@@ -1,0 +1,59 @@
+# gdbinit for Cisco DFP and CPE
+# July 2006
+# Marco Molteni
+
+define print_queue
+    set $p = $arg0
+    while $p != 0
+        printf "pq_value %d\n", $p->pq_value
+        set $p = $p->pq_next
+    end
+end
+
+
+define print_events
+    set $p = (struct cpe_event *) $arg0
+    while $p != 0
+        printf "pq_value %d\n",      $p->pq_value
+        printf "ev_flags %d\n",      $p->ev_flags
+        //printf "ev_pollfd 0x%x\n",   $p->ev_pollfd
+        printf "ev_timeout_us %d\n", $p->ev_timeout_us
+        printf "ev_callback 0x%x\n", $p->ev_callback
+        printf "*ev_arg 0x%x\n",     $p->ev_arg
+        printf "ev_magic 0x%x\n",    $p->ev_magic
+        
+        set $p = $p->pq_next
+    end
+end
+
+
+define print_pollevents
+    set $APR_POLLIN   = 0x001
+    set $APR_POLLPRI  = 0x002
+    set $APR_POLLOUT  = 0x004
+    set $APR_POLLERR  = 0x010
+    set $APR_POLLHUP  = 0x020
+    set $APR_POLLNVAL = 0x040
+
+    if ($arg0 & $APR_POLLIN)
+        echo POLLIN \n
+    end
+    if ($arg0 & $APR_POLLPRI)
+        echo POLLPRI \n
+    end
+    if ($arg0 & $APR_POLLOUT)
+        echo POLLOUT \n
+    end
+    if ($arg0 & $APR_POLLERR)
+        echo POLLERR \n
+    end
+    if ($arg0 & $APR_POLLHUP)
+        echo POLLHUP \n
+    end
+    if ($arg0 & $APR_POLLNVAL)
+        echo POLLNVAL \n
+    end
+
+
+
+end
