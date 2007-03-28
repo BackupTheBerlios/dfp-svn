@@ -18,7 +18,7 @@ LICENSE
 This code is being made available pursuant to the terms of the license
 agreement detailed in the LICENSE file.
 
-EXTERNAL PACKAGES
+REQUIRED EXTERNAL PACKAGES
 
 o Apache Portable Runtime (APR), the portability layer (http://apr.apache.org).
   NOTE: APR 1.2.7 has a bug in the FreeBSD implementation of apr_pollset_poll.
@@ -30,10 +30,13 @@ o Python, a multi-platform scripting language, used for scons and for some of
 o libtap, a C implementation of the Perl Test Anything Protocol (TAP), a
   simple system for testing.
   (http://jc.ngo.org.uk/svnweb/jc/browse/nik/libtap/trunk)
-  (In July 2006, the FreeBSD port of libtap is buggy, so download from svn
-  instead).
-  Note that libtap requires to be bootstrapped by the autotools; I try
-  to avoid to require you to do this but it might fail.
+  You have two options:
+  1. you can use the package libtap-snapshot that we provide as a convenience
+     in the the dfp packages on berlios.de
+  2. You can check it out as follows (in this case you have to bootstrap with
+     autotools):
+      cd dfp/trunk/external-libs
+      svn co svn://jc.ngo.org.uk/nik/libtap/trunk libtap
   
 
 BUILDING

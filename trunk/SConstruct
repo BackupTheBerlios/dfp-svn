@@ -42,17 +42,21 @@ ccflags = ['-W', '-Wall', '-Werror', '-g', '-O0']
 # Note also that --enable-shared=NO doesn't seem to work for APR.
 if not GetOption('clean'):
     import foreignbuild
+    exit = False
     if not os.path.exists(APR_BASEDIR):
         print 'Error: You need to unpack the apr library under', APR_BASEDIR
-        print '       and then resume the build.'
+        print '       and then resume the build (see README.txt for details).'
+        exit = True
+    if not os.path.exists(TAP_BASEDIR):
+        print 'Error: You need to unpack the libtap library under', TAP_BASEDIR
+        print '       and then resume the build (see README.txt for details).'
+        exit = True
+    if exit:
         sys.exit(1)
+
     if foreignbuild.configuremake(APR_BASEDIR, 'installed',
         conf_args = ['--disable-threads', '--disable-shared']) != 0:
         print 'foreignbuild failed, cannot proceed'
-        sys.exit(1)
-    if not os.path.exists(TAP_BASEDIR):
-        print 'Error: You need to unpack the libtap library under', TAP_BASEDIR
-        print '       and then resume the build.'
         sys.exit(1)
     if foreignbuild.configuremake(TAP_BASEDIR, 'installed',
         conf_args = ['--enable-shared=NO'], bootstrap = False) != 0:
