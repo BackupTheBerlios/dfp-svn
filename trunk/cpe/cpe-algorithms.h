@@ -1,4 +1,4 @@
-/* $Id: cpe-algorithms.h 141 2007-03-28 08:19:35Z mmolteni $ */
+/* $Id$ */
 
 /*
 The Cisco-style BSD License

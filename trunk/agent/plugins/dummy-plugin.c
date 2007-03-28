@@ -1,7 +1,7 @@
 /*
  * Portable implementation of the Dynamic Feedback Protocol (DFP)
  *
- * $Id: dummy-plugin.c 136 2007-03-27 12:27:01Z mmolteni $
+ * $Id$
  *
  * Dummy probe to be used as stand-in until the plugin mechanism is working.
  */

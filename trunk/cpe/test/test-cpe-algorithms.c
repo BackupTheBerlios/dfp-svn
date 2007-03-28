@@ -1,7 +1,7 @@
 /*
  * Cisco Portable Events (CPE)
  *
- * $Id: test-cpe-algorithms.c 141 2007-03-28 08:19:35Z mmolteni $
+ * $Id$
  */
 
 /*

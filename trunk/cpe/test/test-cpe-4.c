@@ -1,6 +1,6 @@
 /*
  * Cisco Portable Events (CPE)
- * $Id: test-cpe-4.c 136 2007-03-27 12:27:01Z mmolteni $
+ * $Id$
  */
 
 /*

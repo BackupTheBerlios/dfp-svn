@@ -1,4 +1,4 @@
-/* $Id: socket-cleanup.c 136 2007-03-27 12:27:01Z mmolteni $
+/* $Id$
  * Test if a cleanup function is called on socket close.
  */
 

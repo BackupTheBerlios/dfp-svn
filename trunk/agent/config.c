@@ -1,7 +1,7 @@
 /*
  * Portable implementation of the Dynamic Feedback Protocol (DFP)
  *
- * $Id: config.c 136 2007-03-27 12:27:01Z mmolteni $
+ * $Id$
  *
  * This file is a quick hack for all configurable settings, that will go
  * away once we find a portable, simple, working configuration file parsing

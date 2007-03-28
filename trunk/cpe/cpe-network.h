@@ -1,6 +1,6 @@
 /*
  * Cisco Portable Events (CPE)
- * $Id: cpe-network.h 136 2007-03-27 12:27:01Z mmolteni $
+ * $Id$
  */
 
 /*

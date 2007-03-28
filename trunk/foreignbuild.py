@@ -1,4 +1,4 @@
-# $Id: foreignbuild.py 136 2007-03-27 12:27:01Z mmolteni $
+# $Id$
 
 import os
 import subprocess

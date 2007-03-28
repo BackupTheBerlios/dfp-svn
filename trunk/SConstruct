@@ -1,5 +1,5 @@
 # Top-level scons build file for the Cisco DFP implementation.
-# $Id: SConstruct 140 2007-03-28 07:50:36Z mmolteni $
+# $Id$
 #
 # Requires the scons utility (www.scons.org)
 # Just type "scons" instead of "make".

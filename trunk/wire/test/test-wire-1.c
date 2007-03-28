@@ -1,7 +1,7 @@
 /*
  * Portable implementation of the Dynamic Feedback Protocol (DFP)
  *
- * $Id: test-wire-1.c 136 2007-03-27 12:27:01Z mmolteni $
+ * $Id$
  */
 
 /*

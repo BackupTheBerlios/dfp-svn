@@ -2,7 +2,7 @@
 #
 # Cisco Portable Events (CPE)
 # Marco Molteni, October 2006.
-# $Id: manager.py 129 2007-03-27 08:33:14Z mmolteni $
+# $Id$
 
 import asyncore, socket
 

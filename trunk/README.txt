@@ -1,4 +1,4 @@
-$Id: README.txt 137 2007-03-27 12:34:14Z mmolteni $
+$Id$
 
         Portable implementation of the Dynamic Feedback Protocol (DFP)
                         Cisco Portable Events (CPE)
