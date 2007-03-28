@@ -9,7 +9,7 @@ This code uses Apache APR as its portability layer, so should build and run
 on at least POSIX systems (like the BSDs and Linux) and on Windows. It has been
 built and tested on FreeBSD and Linux.
 
-NOTE: This code is of BETA quality status. Although it has been tested
+NOTE: This code is BETA UNSUPPORTED software. Although it has been tested
 in a lab enviroment with load balancing hardware and showed quite stable,
 it has NOT been tested in a production environment. You have been warned.
 
@@ -51,9 +51,28 @@ DOCUMENTATION
 
 See directory doc in the dfp top-level directory.
 
-CUSTOMIZING PROBES
+METHOD TO CALCULATE THE LOAD / CUSTOMIZING PROBES
 
 See directory agent/plugins.
+
+What is provided right now is just a very crude load calculation, namely
+the kernel load average in the last minute.
+
+SECURITY
+
+You don't need to be root to use the DFP agent, and from a security point of
+view it is strongly advised that you create a special user just to run the
+agent.
+
+USAGE
+
+./dfp-agent      -h will give you a list of the options.
+
+By default dfp-agent listens only on localhost, so to make it actually
+useful you must specify the IP address to listen on with the -a option:
+
+./dfp-agent -a 10.0.0.1
+
 
 FEEDBACK AND BUG REPORTS
 
