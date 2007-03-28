@@ -16,7 +16,7 @@ it has NOT been tested in a production environment. You have been warned.
 LICENSE
 
 This code is being made available pursuant to the terms of the license
-agreement detailed in the LICENSE file.
+agreement detailed in the LICENSE.txt file.
 
 REQUIRED EXTERNAL PACKAGES
 
