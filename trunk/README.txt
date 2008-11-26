@@ -27,6 +27,7 @@ o scons, a multi-platform substitute of make (http://www.scons.org). You
   need version >= 0.96.92.
 o Python, a multi-platform scripting language, used for scons and for some of
   the test scripts (http://www.python.org). 
+o The 'prove' utility from the Perl Test::Harness package (see next item)
 o libtap, a C implementation of the Perl Test Anything Protocol (TAP), a
   simple system for testing.
   (http://jc.ngo.org.uk/svnweb/jc/browse/nik/libtap/trunk)
